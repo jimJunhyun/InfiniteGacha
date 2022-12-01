@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class PullManager : MonoBehaviour
 {
@@ -12,13 +13,16 @@ public class PullManager : MonoBehaviour
 	public UnityEvent OnComp;
 	public List<Sprite> frames;
 
+	public TextMeshProUGUI pullVarTxt;
+
 	List<int> rarityPercentage = new List<int>(); // 전체 100일 경우 확률 (%)
-	List<GachaObject> pulled = new List<GachaObject>();
-	List<Image> frameSlots= new List<Image>();
+	List<SlotBehaviour> frameSlots= new List<SlotBehaviour>();
 	int digit = 0;
 	int rarityRatioSum = 0;
 
 	int idx = 0;
+
+	int totalPull = 0;
 
 	private void Awake()
 	{
@@ -46,7 +50,6 @@ public class PullManager : MonoBehaviour
 			rarityPercentage.Add(Mathf.RoundToInt( rarityRatio[i] * WholePercentage / rarityRatioSum));
 		}
 		GetComponentsInChildren( frameSlots);
-		frameSlots.RemoveAt(0);
 	}
 
 	public void StartPull()
@@ -58,9 +61,12 @@ public class PullManager : MonoBehaviour
 			perAdd += rarityPercentage[i];
 			if(per <= perAdd)
 			{
-				frameSlots[idx].enabled = true;
-				frameSlots[idx].sprite=frames[i];
+				frameSlots[idx].myImg.enabled = true;
+				frameSlots[idx].myImg.sprite=frames[i];
+				frameSlots[idx].OnLightEff(i + 1);
 				++idx;
+				++totalPull;
+				pullVarTxt.text = totalPull.ToString();
 				Debug.Log($"레어도 {i + 1}");
 				break;
 			}
@@ -88,10 +94,10 @@ public class PullManager : MonoBehaviour
 		yield return new WaitUntil(() => { return Input.GetMouseButtonDown(0); });
 		for (int i = 0; i < num; i++)
 		{
-			frameSlots[i].enabled = false;
+			frameSlots[i].myImg.enabled = false;
+			frameSlots[i].OffLightEff();
 		}
 		OnComp.Invoke();
 		idx = 0;
-		pulled = new List<GachaObject>();
 	}
 }
