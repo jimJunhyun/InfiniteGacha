@@ -12,7 +12,7 @@ public class PullManager : MonoBehaviour
 
 	public UnityEvent OnComp;
 	public List<Sprite> frames;
-
+	public float animLen;
 	public TextMeshProUGUI pullVarTxt;
 
 	List<int> rarityPercentage = new List<int>(); // 전체 100일 경우 확률 (%)
@@ -61,9 +61,8 @@ public class PullManager : MonoBehaviour
 			perAdd += rarityPercentage[i];
 			if(per <= perAdd)
 			{
-				frameSlots[idx].myImg.enabled = true;
+				frameSlots[idx].On(i + 1);
 				frameSlots[idx].myImg.sprite=frames[i];
-				frameSlots[idx].OnLightEff(i + 1);
 				++idx;
 				++totalPull;
 				pullVarTxt.text = totalPull.ToString();
@@ -88,15 +87,17 @@ public class PullManager : MonoBehaviour
 		for (int i = 0; i < num; i++)
 		{
 			yield return new WaitUntil(() => { return Input.GetMouseButtonDown(0); });
-			yield return null;
 			StartPull();
+			yield return new WaitForSeconds(animLen);
 		}
+		yield return new WaitForSeconds(animLen);
 		yield return new WaitUntil(() => { return Input.GetMouseButtonDown(0); });
 		for (int i = 0; i < num; i++)
 		{
-			frameSlots[i].myImg.enabled = false;
-			frameSlots[i].OffLightEff();
+			frameSlots[i].Off();
 		}
+
+
 		OnComp.Invoke();
 		idx = 0;
 	}
