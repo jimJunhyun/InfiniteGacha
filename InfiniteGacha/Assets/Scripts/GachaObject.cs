@@ -12,10 +12,9 @@ public class GachaObject : ScriptableObject
 	[Header("5성 1637 ~ 2450+")]
 	public int id;
 	public string objName;
-	[Header("1의 경우 일반적인 확률분배(1/n). 2는 그 2배, 0.5는 그 절반.(이 물건에만 적용)")]
-	public float rateRatio;
+	[Header("전체 비율에서 이 물체가 등장할 비율")]
+	public int rateRatio;
 	[Range(1, 5)]
 	public int rarity;
 	public Sprite icon;
-	
 }
