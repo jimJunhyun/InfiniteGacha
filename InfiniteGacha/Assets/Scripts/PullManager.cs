@@ -18,6 +18,7 @@ public class PullManager : MonoBehaviour
 	public TextMeshProUGUI pullVarTxt;
 
 	public List<List<GachaObject>> starredObjects = new List<List<GachaObject>>(5);
+	public List<Sprite> themeBgnds = new List<Sprite>();
 	public List<int> ratioGraphs = new List<int>(5);
 
 	public ObtainPanel panel;
@@ -36,9 +37,10 @@ public class PullManager : MonoBehaviour
 
 	int idx = 0;
 
-	int totalPull = 0;
+	internal int totalPull = 0;
 
 	const string RESOURCEPATH = "GachaObjects/";
+	const string BGNDPATH = "ThemeBgnd/";
 
 	private void Awake()
 	{
@@ -78,11 +80,11 @@ public class PullManager : MonoBehaviour
 			rarityPercentage.Add(Mathf.RoundToInt( rarityRatio[i] * WholePercentage / rarityRatioSum));
 		}
 		GetComponentsInChildren( frameSlots);
+		themeBgnds = new List<Sprite>(Resources.LoadAll<Sprite>(BGNDPATH).AsEnumerable());
 	}
 
 	public void StartPull()
 	{
-		Debug.Log("Pulled");
 		int per = Random.Range(0, WholePercentage + 1);
 		int perAdd = 0;
 		for (int i = 0; i < rarityPercentage.Count; i++)

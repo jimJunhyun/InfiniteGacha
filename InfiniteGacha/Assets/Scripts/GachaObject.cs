@@ -5,6 +5,24 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GachaObject : ScriptableObject
 {
+	public enum Themes //가나다순 정렬
+	{
+		ArtNoveau,
+
+		None,
+		
+		
+		Sea,
+
+		Universe,
+		
+		
+
+
+
+		Max
+	}
+
 	[Header("1성 0 ~ 323")]
 	[Header("2성 324 ~ 812")]
 	[Header("3성 813 ~ 1223")]
@@ -17,4 +35,6 @@ public class GachaObject : ScriptableObject
 	[Range(1, 5)]
 	public int rarity;
 	public Sprite icon;
+	[Header("테마 배경")]
+	public Themes theme;
 }

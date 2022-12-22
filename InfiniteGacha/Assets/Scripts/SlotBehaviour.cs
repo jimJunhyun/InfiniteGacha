@@ -8,23 +8,30 @@ public class SlotBehaviour : MonoBehaviour
     ChangeAura lightSpin;
 	ImageLoader objIcon;
 	Animator anim;
+	internal Image myBgnd;
 	internal Image myImg;
+	
 	private void Awake()
 	{
-		
+		Image[] imgs = GetComponentsInChildren<Image>();
 		lightSpin = GetComponentInChildren<ChangeAura>();
 		objIcon = GetComponentInChildren<ImageLoader>();
-		myImg = GetComponentsInChildren<Image>()[1];
+		myBgnd = imgs[1];
+		myImg = imgs[2];
 		anim = GetComponent<Animator>();
 	}
 	public void On(int rarity)
 	{
+		Sprite sp;
 		OnLightEff(rarity);
-		objIcon.GetObject(rarity);
+		objIcon.GetObject(rarity, out sp);
+		myBgnd.enabled = true;
+		myBgnd.sprite = sp;
 		anim.SetTrigger("Appear");
 	}
 	public void Off()
 	{
+		myBgnd.enabled = false;
 		myImg.enabled = false;
 		objIcon.ResetObject();
 		OffLightEff();

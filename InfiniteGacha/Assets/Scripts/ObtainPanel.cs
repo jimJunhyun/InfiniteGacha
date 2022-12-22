@@ -18,6 +18,10 @@ public class ObtainPanel : MonoBehaviour
 	List<Animator> slotsAnim = new List<Animator>();
 
 	public bool isOpen = false;
+
+	const string RESOURCEPATH = "GachaObjects/ThemeBgnd/";
+
+
 	private void Awake()
 	{
 		Image[] childImgs = GetComponentsInChildren<Image>();
@@ -37,6 +41,7 @@ public class ObtainPanel : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		myImg.enabled = false;
+		myImg.sprite = PullManager.instance.themeBgnds[((int)obj.theme)];
 		StartCoroutine(DelayOn(obj));
 	}
 	public void Off()
@@ -60,7 +65,6 @@ public class ObtainPanel : MonoBehaviour
 		shade.color = rarityColors[obj.rarity - 1];
 		yield return new WaitForSeconds(0.1f);
 		anim.SetBool("Appear", true);
-		
 		yield return new WaitForSeconds(1.3f);
 		for (int i = 0; i < starSlots.Count; i++)
 		{
