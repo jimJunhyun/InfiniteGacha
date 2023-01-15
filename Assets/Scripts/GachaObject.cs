@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu]
 public class GachaObject : ScriptableObject
@@ -37,4 +39,6 @@ public class GachaObject : ScriptableObject
 	public Sprite icon;
 	[Header("테마 배경")]
 	public Themes theme;
+
+	public GameObject L2DData;
 }
