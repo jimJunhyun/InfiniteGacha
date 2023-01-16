@@ -19,7 +19,6 @@ public class ImageLoader : MonoBehaviour
 		List<GachaObject> looking = PullManager.instance.starredObjects[rarity - 1];
 		GachaObject got = looking[0];
 		int per = Random.Range(0, PullManager.instance.ratioGraphs[rarity - 1] + 1);
-		Debug.Log(per);
 		int perAdd = 0;
 		for (int i = 0; i < looking.Count; i++)
 		{

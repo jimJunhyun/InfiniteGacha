@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1224
   objName: "\uD68C\uC804\uCD08\uBC25"
-  rateRatio: 1
+  rateRatio: 24
   rarity: 4
   icon: {fileID: 21300000, guid: a0527b1a113282b45b1082841ac9ade3, type: 3}
   theme: 2

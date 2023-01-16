@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ae2dd693bb1d4b924f6b8d206b053, type: 3}
   m_Name: Convyor_belt_Sushi.fadeMotionList
   m_EditorClassIdentifier: 
-  MotionInstanceIds: 10d4ffff04d4ffff
+  MotionInstanceIds: 10d4ffff1ad9ffff
   CubismFadeMotionObjects:
   - {fileID: 11400000, guid: 762f7931955fd8241bd46e94bedd2d0a, type: 2}
   - {fileID: 11400000, guid: ffc8eb5664efdf24280eb525dff6f4c1, type: 2}

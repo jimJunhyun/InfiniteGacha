@@ -64,7 +64,18 @@ public class ObtainPanel : MonoBehaviour
 		objIcon.sprite = obj.icon;
 		shade.color = rarityColors[obj.rarity - 1];
 		yield return new WaitForSeconds(0.1f);
-		anim.SetBool("Appear", true);
+		if(obj.L2DData != null)
+		{
+			L2DManager.instance.OnL2D(obj);
+			//페이드하면서 등장 (뒷배경, 그림자 효과)
+			//알파 조정 + 활성화시키기.
+			myImg.enabled = true;
+		}
+		else
+		{
+			anim.SetBool("Appear", true);
+			
+		}
 		yield return new WaitForSeconds(1.3f);
 		for (int i = 0; i < starSlots.Count; i++)
 		{
@@ -85,6 +96,7 @@ public class ObtainPanel : MonoBehaviour
 		AudioPlayer.instance.PlayAudio(objSound);
 		yield return new WaitForSeconds(0.3f);
 		yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
+		L2DManager.instance.OffL2D();
 		Off();
 	}
 }
